@@ -1,4 +1,4 @@
-# Singularity image perceptron_complete.sif : Residue-level IDR Prediction Pipeline
+# Singularity image spitriad.sif : Residue-level IDR Prediction Pipeline
 
 Singularity image for residue-level IDP/IDR prediction into three classes:
 **Structure**, **Disorder**, **Disorder-Binding**.
@@ -13,6 +13,15 @@ Singularity image for residue-level IDP/IDR prediction into three classes:
 
 
 ## Usage
+
+### SPITRIAD Singularity/Apptainer Image
+
+The pipeline uses same in a container image. You can download it from Zenodo:
+
+> **SPITRIAL Apptainer/Singularity Image**
+> [https://zenodo.org/records/20842530](https://zenodo.org/records/20842530)
+
+Download the `.sif` file and place it in a location accessible from your compute nodes. 
 
 ### Basic command
 
