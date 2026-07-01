@@ -16,7 +16,7 @@ Singularity image for residue-level IDP/IDR prediction into three classes:
 
 ### SPITRIAD Singularity/Apptainer Image
 
-The pipeline uses same in a container image. You can download it from Zenodo:
+The pipeline uses a container image. You can download it from Zenodo:
 
 > **SPITRIAL Apptainer/Singularity Image**
 > [[https://zenodo.org/records/21083527]](https://zenodo.org/records/21083527)
@@ -30,7 +30,7 @@ Download the `.sif` file and place it in a location accessible from your compute
 singularity run --nv --no-home \
     --bind <embeddings_dir>:<embeddings_dir> \
     --bind <output_dir>:<output_dir> \
-    perceptron_complete.sif \
+    spitriad.sif \
     prediction \
     --embeddings <embeddings_dir> \
     --csv        <embeddings_dir>/proteins.csv \
