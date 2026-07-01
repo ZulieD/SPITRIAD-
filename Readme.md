@@ -30,7 +30,7 @@ Download the `.sif` file and place it in a location accessible from your compute
 singularity run --nv --no-home \
     --bind <embeddings_dir>:<embeddings_dir> \
     --bind <output_dir>:<output_dir> \
-    spitriad.sif \
+    spitrial.sif \
     prediction \
     --embeddings <embeddings_dir> \
     --csv        <embeddings_dir>/proteins.csv \
