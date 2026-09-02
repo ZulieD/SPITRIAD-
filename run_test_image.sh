@@ -18,9 +18,11 @@ echo "AF2 job soumis : $AF2_JOB_ID"
 FINAL_OUTPUT="${AF2_OUTPUT_DIR}/final_output"
 mkdir -p "$FINAL_OUTPUT"          
 
+PROTT5_FOLDER="/stockage/EQUIPES/AMIG/MEMBERS/julie.daniel/IDP/scripts/Final_run/hf_cache"
+
 SIF_PATH="spitriad.sif"
 
-sbatch -p amig \
+sbatch \
     --dependency=afterok:"$AF2_JOB_ID" \
     --job-name=idp_prediction \
     --cpus-per-task=4 \
@@ -28,10 +30,12 @@ sbatch -p amig \
     --gres=gpu:1 \
     --time=10:00:00 \
     --wrap="singularity run --nv --no-home \
+        --bind ${PROTT5_FOLDER}:${PROTT5_FOLDER} \
         --bind ${AF2_OUTPUT_DIR}:${AF2_OUTPUT_DIR} \
         --bind ${FINAL_OUTPUT}:${FINAL_OUTPUT} \
         ${SIF_PATH} \
         prediction \
         --embeddings ${AF2_OUTPUT_DIR} \
         --csv ${AF2_OUTPUT_DIR}/proteins.csv \
-        --output ${FINAL_OUTPUT}"
+        --output ${FINAL_OUTPUT}" \
+        --prott5_folder ${PROTT5_FOLDER}/models--Rostlab--prot_t5_xl_half_uniref50-enc"
