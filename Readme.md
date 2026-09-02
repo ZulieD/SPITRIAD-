@@ -28,13 +28,15 @@ Download the `.sif` file and place it in a location accessible from your compute
 
 ```bash
 singularity run --nv --no-home \
+    --bind <prott5_weight_folder>:<prott5_weight_folder>  \
     --bind <embeddings_dir>:<embeddings_dir> \
     --bind <output_dir>:<output_dir> \
     spitrial.sif \
     prediction \
     --embeddings <embeddings_dir> \
     --csv        <embeddings_dir>/proteins.csv \
-    --output     <output_dir>
+    --output     <output_dir> \
+    --prott5_folder <prott5_weight_folder>/models--Rostlab--prot_t5_xl_half_uniref50-enc"
 ```
 
 ### Available options
@@ -44,6 +46,7 @@ singularity run --nv --no-home \
 | `--embeddings` | yes | Directory containing AF2 outputs per protein |
 | `--csv` | yes | CSV file with columns `protein_id` and `sequence` |
 | `--output` | yes | Output directory for `.caid` prediction files |
+| `--prott5_folder` | no | Name of the cache directoy (default : `Rostlab/prot_t5_xl_half_uniref50-enc`) |
 | `--embeddings_output` | no | Alternative directory for intermediate embeddings (default: `/opt/output`) |
 
 
@@ -106,7 +109,6 @@ Columns: `position`, `amino_acid`, `score [0-1]`, `binary_label`.
 | Base image | `nvcr.io/nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04` |
 | Env `venv_idp` | Python 3.11 — AAindex encoding, distograms, prediction |
 | Env `prott5_env` | Python 3.11 — ProtT5-XL-U50 embeddings (GPU) |
-| ProtT5 model | `Rostlab/prot_t5_xl_half_uniref50-enc` (pre-downloaded in `/opt/hf_cache`) |
 | Scripts | `/opt/scripts/` |
 | ML models | `/opt/models/` |
 
