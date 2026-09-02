@@ -1,0 +1,19 @@
+{
+  "task1_path": "/opt/models/task1_sklearn.pkl",
+  "task2_path": "/opt/models/task2_mlp.pt",
+  "task1_type": "sklearn",
+  "task2_type": "mlp",
+  "task1_auc_val": 0.8636964847827338,
+  "task2_auc_val": 0.7504188162705137,
+  "task1_grid_weights": [
+    0.1,
+    1.0,
+    1.0
+  ],
+  "task2_grid_weights": [
+    1.0,
+    1.0,
+    1.0
+  ],
+  "output_mode": "fused"
+}
