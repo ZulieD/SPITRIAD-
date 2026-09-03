@@ -67,7 +67,7 @@ singularity run --nv --no-home \
     --bind <prott5_weight_folder>:<prott5_weight_folder>  \
     --bind <embeddings_dir>:<embeddings_dir> \
     --bind <output_dir>:<output_dir> \
-    spitrial.sif \
+    spitriad.sif \
     prediction \
     --embeddings <embeddings_dir> \
     --csv        <embeddings_dir>/proteins.csv \
