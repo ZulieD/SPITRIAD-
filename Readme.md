@@ -1,4 +1,4 @@
-# Singularity/Docker image spitriad.sif : Residue-level IDR Prediction Pipeline
+# Singularity/Docker image SPITRIAD : Residue-level IDR Prediction Pipeline
 
 Image for residue-level IDP/IDR prediction into three classes:
 **Structure**, **Disorder**, **Disorder-Binding**.
