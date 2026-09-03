@@ -1,12 +1,11 @@
-# Singularity image spitriad.sif : Residue-level IDR Prediction Pipeline
+# Singularity/Docker image spitriad.sif : Residue-level IDR Prediction Pipeline
 
-Singularity image for residue-level IDP/IDR prediction into three classes:
+Image for residue-level IDP/IDR prediction into three classes:
 **Structure**, **Disorder**, **Disorder-Binding**.
 
 ---
 ## Requirements
 
-- Singularity ≥ 3.8
 - NVIDIA GPU with CUDA 11.6-compatible drivers (required for ProtT5)
 - Pre-computed AlphaFold2 outputs (distogram `.pickle` files per protein) --> can be run from our script `run_alphafold_cluster.sbatch`
 - Input CSV file with columns `protein_id` and `sequence` --> directly output by `run_alphafold_cluster.sbatch`
@@ -14,9 +13,46 @@ Singularity image for residue-level IDP/IDR prediction into three classes:
 
 ## Usage
 
+---
+### SPITRIAD Docker Image 
+
+The pipeline can be use with a docker image. You can download it from HubDocker
+
+> **SPIRAL Docker Image**
+> ([https://hub.docker.com/r/zulied/spitriad](https://hub.docker.com/r/zulied/spitriad)))
+
+### Requirements
+
+- Docker ≥ 19.03 (with --gpus support)
+- NVIDIA Container Toolkit installed on the host machine
+- NVIDIA driver ≥ 510.39.01 (compatible with CUDA 11.6.2)
+- Architecture: linux/amd64
+
+
+Download with 
+
+```bash
+docker pull zulied/spitriad:v1.0
+```
+
+### Basic command 
+
+```bash
+docker run --gpus all \
+    -v <prott5_weight_folder>:<prott5_weight_folder>
+    -v <embeddings_dir>:<embeddings_dir> \
+    -v <output_dir>:<output_dir> \
+    zulied/spitriad:v1.0 \
+    prediction \
+    --embeddings <embeddings_dir> \
+    --csv <embeddings_dir>/proteins.csv \
+    --output <output_dir> \
+    --prott5_folder <prott5_weight_folder>
+```
+
 ### SPITRIAD Singularity/Apptainer Image
 
-The pipeline uses a container image. You can download it from Zenodo:
+The pipeline can also be uses with a singularity image. You can download it from Zenodo:
 
 > **SPITRIAL Apptainer/Singularity Image**
 > ([https://zenodo.org/records/21083527](https://zenodo.org/records/22248939)) 
@@ -38,6 +74,8 @@ singularity run --nv --no-home \
     --output     <output_dir> \
     --prott5_folder <prott5_weight_folder>/models--Rostlab--prot_t5_xl_half_uniref50-enc"
 ```
+---
+
 
 ### Available options
 
@@ -109,7 +147,7 @@ Columns: `position`, `amino_acid`, `score [0-1]`, `binary_label`.
 | Base image | `nvcr.io/nvidia/cuda:11.6.2-cudnn8-runtime-ubuntu20.04` |
 | Env `venv_idp` | Python 3.11 — AAindex encoding, distograms, prediction |
 | Env `prott5_env` | Python 3.11 — ProtT5-XL-U50 embeddings (GPU) |
-| Scripts | `/opt/scripts/` |
+| Scripts | `/opt/scripts/`  save in `src` |
 | ML models | `/opt/models/` |
 
 ### Internal scripts
